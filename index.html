@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Inscríbete – Charla de Maquillaje</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --rose:    #F4A7B9;
+      --rose-dk: #E07898;
+      --blush:   #FDE8EF;
+      --cream:   #FFF8FB;
+      --white:   #FFFFFF;
+      --text:    #3D2030;
+      --muted:   #A07080;
+      --border:  #F2C8D8;
+    }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--cream);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem 1rem;
+      overflow-x: hidden;
+    }
+
+    /* Background blobs */
+    body::before, body::after {
+      content: '';
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(80px);
+      opacity: .45;
+      pointer-events: none;
+      z-index: 0;
+    }
+    body::before {
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, #f9c8da, #fde0eb);
+      top: -120px; right: -120px;
+    }
+    body::after {
+      width: 400px; height: 400px;
+      background: radial-gradient(circle, #fbb6ce, #fde8ef);
+      bottom: -100px; left: -100px;
+    }
+
+    .card {
+      position: relative;
+      z-index: 1;
+      background: var(--white);
+      border-radius: 28px;
+      box-shadow: 0 8px 48px rgba(200, 80, 120, .12), 0 2px 12px rgba(200,80,120,.07);
+      max-width: 520px;
+      width: 100%;
+      overflow: hidden;
+      animation: fadeUp .7s ease both;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(28px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Hero header */
+    .hero {
+      background: linear-gradient(135deg, #f9a8c9 0%, #f472a8 60%, #e0567e 100%);
+      padding: 2.8rem 2.4rem 2.2rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      width: 260px; height: 260px;
+      border-radius: 50%;
+      background: rgba(255,255,255,.1);
+      top: -80px; right: -60px;
+    }
+    .hero::after {
+      content: '';
+      position: absolute;
+      width: 160px; height: 160px;
+      border-radius: 50%;
+      background: rgba(255,255,255,.08);
+      bottom: -50px; left: -40px;
+    }
+
+    .badge {
+      display: inline-block;
+      background: rgba(255,255,255,.22);
+      color: #fff;
+      font-family: 'DM Sans', sans-serif;
+      font-size: .72rem;
+      font-weight: 500;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      padding: .35rem 1rem;
+      border-radius: 100px;
+      margin-bottom: 1rem;
+      border: 1px solid rgba(255,255,255,.3);
+    }
+
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      color: #fff;
+      line-height: 1.2;
+      margin-bottom: .6rem;
+      position: relative;
+      z-index: 1;
+    }
+    .hero h1 em {
+      font-style: italic;
+      font-weight: 400;
+    }
+
+    .hero p {
+      color: rgba(255,255,255,.88);
+      font-size: .92rem;
+      font-weight: 300;
+      line-height: 1.6;
+      position: relative;
+      z-index: 1;
+    }
+
+    .promo-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: .45rem;
+      background: rgba(255,255,255,.18);
+      border: 1px solid rgba(255,255,255,.35);
+      border-radius: 100px;
+      padding: .45rem 1.1rem;
+      margin-top: 1.1rem;
+      color: #fff;
+      font-size: .82rem;
+      font-weight: 500;
+      position: relative;
+      z-index: 1;
+    }
+    .promo-tag svg { flex-shrink: 0; }
+
+    /* Form body */
+    .form-body {
+      padding: 2.2rem 2.4rem 2.4rem;
+    }
+
+    .form-intro {
+      font-size: .88rem;
+      color: var(--muted);
+      margin-bottom: 1.8rem;
+      line-height: 1.6;
+    }
+
+    .field {
+      margin-bottom: 1.3rem;
+      animation: fadeUp .6s ease both;
+    }
+    .field:nth-child(1) { animation-delay: .05s; }
+    .field:nth-child(2) { animation-delay: .1s; }
+    .field:nth-child(3) { animation-delay: .15s; }
+    .field:nth-child(4) { animation-delay: .2s; }
+
+    label {
+      display: block;
+      font-size: .8rem;
+      font-weight: 500;
+      color: var(--text);
+      margin-bottom: .45rem;
+      letter-spacing: .02em;
+    }
+    label span.req { color: var(--rose-dk); margin-left: 2px; }
+
+    input, textarea {
+      width: 100%;
+      font-family: 'DM Sans', sans-serif;
+      font-size: .93rem;
+      font-weight: 300;
+      color: var(--text);
+      background: var(--blush);
+      border: 1.5px solid var(--border);
+      border-radius: 12px;
+      padding: .82rem 1.1rem;
+      outline: none;
+      transition: border-color .2s, box-shadow .2s, background .2s;
+      -webkit-appearance: none;
+    }
+    input::placeholder, textarea::placeholder {
+      color: #c8a0b0;
+      font-weight: 300;
+    }
+    input:focus, textarea:focus {
+      border-color: var(--rose-dk);
+      background: var(--white);
+      box-shadow: 0 0 0 3.5px rgba(228, 100, 140, .13);
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 110px;
+      line-height: 1.6;
+    }
+
+    /* Submit button */
+    .btn {
+      width: 100%;
+      margin-top: .6rem;
+      padding: 1rem;
+      background: linear-gradient(135deg, #f472a8, #e0567e);
+      color: #fff;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 1rem;
+      font-weight: 500;
+      border: none;
+      border-radius: 14px;
+      cursor: pointer;
+      letter-spacing: .03em;
+      transition: transform .18s, box-shadow .18s, filter .18s;
+      box-shadow: 0 4px 20px rgba(224,86,126,.35);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: .6rem;
+    }
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 28px rgba(224,86,126,.42);
+      filter: brightness(1.05);
+    }
+    .btn:active { transform: translateY(0); }
+
+    /* Success state */
+    .success {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 3rem 2.4rem;
+      text-align: center;
+      gap: 1rem;
+      animation: fadeUp .5s ease both;
+    }
+    .success-icon {
+      width: 72px; height: 72px;
+      background: linear-gradient(135deg, #f9a8c9, #e0567e);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: .5rem;
+      box-shadow: 0 6px 24px rgba(224,86,126,.3);
+    }
+    .success h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.6rem;
+      color: var(--text);
+    }
+    .success p { color: var(--muted); font-size: .9rem; line-height: 1.6; }
+
+    /* Footer */
+    .footer {
+      text-align: center;
+      padding: 0 2.4rem 1.6rem;
+      font-size: .75rem;
+      color: #c8a0b0;
+    }
+
+    @media (max-width: 480px) {
+      .hero { padding: 2.2rem 1.6rem 1.8rem; }
+      .form-body { padding: 1.8rem 1.6rem 2rem; }
+      .hero h1 { font-size: 1.65rem; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="card">
+  <div class="hero">
+    <div class="badge">✨ Promoción Especial</div>
+    <h1>Cómo lucir y escoger<br><em>tu maquillaje correctamente</em></h1>
+    <p>Charla exclusiva para aprender a resaltar<br>tu belleza con el maquillaje ideal</p>
+    <div class="promo-tag">
+      <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M20 12V22H4V12"/><path d="M22 7H2v5h20V7z"/><path d="M12 22V7"/><path d="M12 7H7.5a2.5 2.5 0 010-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 000-5C13 2 12 7 12 7z"/></svg>
+      Compras superiores a $80.000 en maquillaje
+    </div>
+  </div>
+
+  <div class="form-body" id="formSection">
+    <p class="form-intro">Completa el formulario y te contactaremos para confirmar tu cupo en la charla. ¡Los cupos son limitados!</p>
+
+    <form id="registroForm" novalidate>
+      <div class="field">
+        <label for="nombre">Nombre completo <span class="req">*</span></label>
+        <input type="text" id="nombre" placeholder="Ej. Laura Martínez" required />
+      </div>
+
+      <div class="field">
+        <label for="celular">Número de celular <span class="req">*</span></label>
+        <input type="tel" id="celular" placeholder="Ej. 3001234567" required />
+      </div>
+
+      <div class="field">
+        <label for="edad">Edad <span class="req">*</span></label>
+        <input type="number" id="edad" placeholder="Ej. 28" min="10" max="99" required />
+      </div>
+
+      <div class="field">
+        <label for="motivo">¿Por qué quieres participar? <span class="req">*</span></label>
+        <textarea id="motivo" placeholder="Cuéntanos un poco sobre ti y qué esperas aprender en esta charla..." required></textarea>
+      </div>
+
+      <button type="submit" class="btn">
+        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/>
+        </svg>
+        Inscribirme ahora
+      </button>
+    </form>
+  </div>
+
+  <div class="success" id="successSection">
+    <div class="success-icon">
+      <svg width="32" height="32" fill="none" stroke="white" stroke-width="2.5" viewBox="0 0 24 24">
+        <polyline points="20 6 9 17 4 12"/>
+      </svg>
+    </div>
+    <h2>¡Listo, <span id="nombreConfirm"></span>!</h2>
+    <p>Tu inscripción fue recibida. Muy pronto te contactaremos para confirmar tu cupo. 💄</p>
+  </div>
+
+  <div class="footer">Todos los campos son obligatorios · Información confidencial</div>
+</div>
+
+<script>
+  const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwrfpBZQOG3YwtzyI8cn-M59pdlreN1NOs0-zO4ZMnE5Wj4NXAZo4qPDh3mS4pIfXgC/exec';
+
+  document.getElementById('registroForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const nombre  = document.getElementById('nombre').value.trim();
+    const celular = document.getElementById('celular').value.trim();
+    const edad    = document.getElementById('edad').value.trim();
+    const motivo  = document.getElementById('motivo').value.trim();
+
+    if (!nombre || !celular || !edad || !motivo) {
+      alert('Por favor completa todos los campos antes de enviar.');
+      return;
+    }
+
+    const btn = document.querySelector('.btn');
+    btn.innerHTML = 'Enviando...';
+    btn.disabled = true;
+
+    try {
+      await fetch(SCRIPT_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ nombre, celular, edad, motivo })
+      });
+    } catch (err) {
+      console.error('Error al enviar:', err);
+    }
+
+    document.getElementById('formSection').style.display = 'none';
+    const s = document.getElementById('successSection');
+    s.style.display = 'flex';
+    document.getElementById('nombreConfirm').textContent = nombre.split(' ')[0];
+  });
+</script>
+</body>
+</html>
